@@ -1,0 +1,22 @@
+<?php
+
+// hook
+function aac_admin_menu_output_alter(&$content) {
+	global $user;
+
+  if($user->uid === 0) {
+    // Anonymous user
+		$content['account'] = NULL;
+		$content['users'] = NULL;
+		$content['search'] = NULL;
+  }
+}
+
+
+// hook_form_alter
+function aac_form_alter(&$form, &$form_state, $form_id) {
+	if($form_id === 'user_login') {
+		drupal_add_css(drupal_get_path('module', 'aac') . '/css/aac.css');
+
+	}
+}
