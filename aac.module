@@ -10,12 +10,23 @@ function aac_admin_menu_output_alter(&$content) {
 		$content['users'] = NULL;
 		$content['search'] = NULL;
   }
+	else if($user->roles && is_array($user->roles)) {
+		foreach($user->roles as $key => $value) {
+			if($value === 'admin') {
+				$content['search'] = NULL;
+				break;
+			}
+		}
+	}
 }
 
 
 // hook_form_alter
 function aac_form_alter(&$form, &$form_state, $form_id) {
 	if($form_id === 'user_login') {
-
+		$username_text = 'Enter your University of Melbourne username';
+		$pass_text = 'Enter your University of Melbourne password';
+		$form['name']['#title'] = $username_text;
+		$form['pass']['#title'] = $pass_text;
 	}
 }
