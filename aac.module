@@ -4,6 +4,29 @@
 function aac_admin_menu_output_alter(&$content) {
 	global $user;
 
+	//test
+	//dsm($content);
+	
+	// Change menu href from node/xxx to title name
+	foreach($content['menu'] as &$internal_path) {
+		$the_title = strtolower( $internal_path['#title'] );
+		if($the_title == 'background') {
+			$internal_path['#href'] = 'background';
+		} 
+		else if($the_title == 'links') {
+			$internal_path['#href'] = 'links';
+		}
+		else if($the_title == 'about us') {
+			$internal_path['#href'] = 'about-us';
+		}
+		else if($the_title == 'outcomes') {
+			$internal_path['#href'] = 'outcomes';
+		}
+		else if($the_title == 'contact') {
+			$internal_path['#href'] = 'contact';
+		}
+	}
+
   if($user->uid === 0) {
     // Anonymous user
 		$content['account'] = NULL;
